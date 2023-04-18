@@ -11,21 +11,18 @@ while moneda_cripto != "" and moneda_cripto.isalpha() == True:
     #Invocar al metodo get con la url especifica
     r = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{moneda_cripto}/EUR?apikey={APIKEY}')
 
-    respuesta = r.json()
-    #ejercicio 1, como capturamos el rate
+    respuesta = r.json()  # la respuesta http en formato diccionario
 
-
-
+   
     #ejercicio 2, como capturar el error
     if r.status_code == 200:
+         #ejercicio 1, como capturamos el rate
         print("{:,.2f}€".format(respuesta['rate']))
         break
     else:
         print(respuesta['error'])
 
     moneda_cripto = input("Ingrese una criptomoneda conocida: ").upper()
-
-
 
 
 
