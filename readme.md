@@ -26,3 +26,5 @@ APIKEY = "4546565ghghg67767"
 ```
 pip install -r requirements.txt
 ```
+
+- Utiliza la libreria de pytest y requests
