@@ -1,17 +1,18 @@
-import requests
+
 from config import *
 from models import *
+from views import Views
 
 allcoin = AllCoinApiIO()
+
+viewTools = Views()
 
 #consulta de todas las monedas
 allcoin.getAllCoins(APIKEY)
 
-print (f"La cantidad de criptos son: {len(allcoin.lista_criptos)},\
-       y la cantidad de no criptos son: {len(allcoin.lista_no_criptos)}")
+viewTools.viewListCoins(allcoin = allcoin)
 
-
-moneda_cripto = input("Ingrese una criptomoneda conocida: ").upper()
+moneda_cripto = viewTools.InsertCoin()
 
 while moneda_cripto != "" and moneda_cripto.isalpha() == True:
     if moneda_cripto in allcoin.lista_criptos: 
@@ -19,8 +20,8 @@ while moneda_cripto != "" and moneda_cripto.isalpha() == True:
 
       try:
          exchange.updateExchange(APIKEY)
-         print("{:,.2f}€".format(exchange.rate).replace('.', ',').replace(',', '.', 1))
+         viewTools.viewRateExchange(exchange)
       except ModelError as error:
-         print(error)
+         viewTools.viewError(error)
 
-    moneda_cripto = input("Ingrese una criptomoneda conocida: ").upper()
+    moneda_cripto = viewTools.InsertCoin()
